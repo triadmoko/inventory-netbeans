@@ -7,6 +7,7 @@ package gui;
 
 import com.jtattoo.plaf.mint.MintLookAndFeel;
 import control.control_transaksi;
+import control.control_cicil;
 import control.koneksi;
 import control.laporan;
 import control.utama;
@@ -34,6 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Transaksi extends javax.swing.JFrame {
     control_transaksi ct;
+    control_cicil cc;
     laporan lp;
     koneksi db;
     utama ut;
@@ -58,6 +60,7 @@ public class Transaksi extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
    
         db = new koneksi();
+        cc = new control_cicil();
         ct = new control_transaksi();
         lp = new laporan();
         ut = new utama();
@@ -920,11 +923,10 @@ public class Transaksi extends javax.swing.JFrame {
        
         
         try {
-            ct.simpanPenjualan(nofak,kasir,id_pelanggan, pelanggan, diskon,total,bayar,kembali,tanggal);
+            cc.simpanCicilan(nofak,kasir,id_pelanggan, pelanggan, diskon,total,bayar,kembali,tanggal);
             JOptionPane.showMessageDialog(rootPane, "DATA BERHASIL DI SIMPAN");
          
                
-
           
 //            ct.noFak();
         } catch (SQLException ex) {

@@ -32,7 +32,7 @@ public class control_cicil extends koneksi{
             model.addRow(data);
         }
     }
-    public void simpanPenjualan(String no_cicil,String kasir,String id_pelanggan,String namaPelanggan,int diskon,int total,int bayar,int kurang,String tgl) throws SQLException{
+    public void simpanCicilan(String no_cicil,String kasir,String id_pelanggan,String namaPelanggan,int diskon,int total,int bayar,int kurang,String tgl) throws SQLException{
         String sql = "INSERT INTO cicil VALUES('"+no_cicil+"','"+kasir+"','"+id_pelanggan+"','"+namaPelanggan+"','"+diskon+"','"+total+"','"+bayar+"','"+kurang+"','"+tgl+"')";
         st.executeUpdate(sql);
     }
