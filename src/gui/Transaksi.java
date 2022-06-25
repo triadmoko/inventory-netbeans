@@ -880,6 +880,7 @@ public class Transaksi extends javax.swing.JFrame {
 
     private void btnCicilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCicilActionPerformed
         // TODO add your handling code here:
+        cc.noFak();
         String nofak = txNofak.getText();
         String kasir = txKasir.getText();
         String id_pelanggan = txidPelanggan.getText();
@@ -920,15 +921,13 @@ public class Transaksi extends javax.swing.JFrame {
                 Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
             }
        }
-       
-        
+              
         try {
             cc.simpanCicilan(nofak,kasir,id_pelanggan, pelanggan, diskon,total,bayar,kembali,tanggal);
+            int bayarke = 1;
+            cc.transaksiCicilan(nofak, bayarke, bayar, tanggal);
             JOptionPane.showMessageDialog(rootPane, "DATA BERHASIL DI SIMPAN");
          
-               
-          
-//            ct.noFak();
         } catch (SQLException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
         } 

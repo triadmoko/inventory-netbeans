@@ -5,49 +5,41 @@
  */
 package gui;
 
-
-
-import control.masterBarang;
-import control.pelanggan;
-
+import control.masterCicil;
 
 /**
  *
- * @author Acer
+ * @author N
  */
-public class frmCariBarang extends javax.swing.JDialog {
-    masterBarang mb;
-    pelanggan pl;
+public class frmCariCicilan extends javax.swing.JDialog {
+masterCicil mc;
     String caller ="";
     /**
-     * Creates new form frmCariBarang
+     * Creates new form frmCariCicilan
      */
-    public frmCariBarang(java.awt.Frame parent, boolean modal,String caller) {
+    public frmCariCicilan(java.awt.Frame parent, boolean modal, String caller) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        mb = new masterBarang();
-        pl = new pelanggan();
+        mc = new masterCicil();
         
         this.caller = caller;
         tampil();
-  
     }
 
-      public void tampil(){
-          if(caller.equalsIgnoreCase("Transaksi")){
-              tabel.setModel(mb.modelBarang);
-        mb.modelBarang.setRowCount(0);
-        mb.tampil();
-          }else if(caller.equalsIgnoreCase("Pelanggan")){
-              tabel.setModel(pl.model);
-              pl.model.setRowCount(0);
-              pl.tampil();
+    private void tampil() {
+         if(caller.equalsIgnoreCase("Cicil")){
+            tabel.setModel(mc.modelCicil);
+            mc.modelCicil.setRowCount(0);
+            mc.tampil();
           }
-         
+//         else if(caller.equalsIgnoreCase("Pelanggan")){
+//              tabel.setModel(pl.model);
+//              pl.model.setRowCount(0);
+//              pl.tampil();
+//          }
     }
-      
-       
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,7 +92,7 @@ public class frmCariBarang extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,50 +101,41 @@ public class frmCariBarang extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        if(caller.equalsIgnoreCase("Transaksi")){
-            int row = tabel.getSelectedRow();
-       String kode = tabel.getValueAt(row, 0).toString();
-       String nama = tabel.getValueAt(row, 1).toString();
-       int stok = Integer.parseInt(tabel.getValueAt(row, 2).toString());
-       int harga = Integer.parseInt(tabel.getValueAt(row, 3).toString());
-
-       Transaksi.txkode.setText(kode);
-       Transaksi.txnama.setText(nama);
-       Transaksi.harga = harga;
-       Transaksi.stok = stok;
-       Transaksi.txqty.setEditable(true);
-       Transaksi.btnSimpan.setEnabled(true);
-       Transaksi.txqty.requestFocus();
-       dispose();
-        }else if(caller.equalsIgnoreCase("Pelanggan")){
-            int row = tabel.getSelectedRow();
-            String id = tabel.getValueAt(row, 0).toString();
-            String nama = tabel.getValueAt(row, 1).toString();
-            Transaksi.txidPelanggan.setText(id);
-            Transaksi.txpelanggan.setText(nama);
-            dispose();
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
         // TODO add your handling code here:
-       
     }//GEN-LAST:event_tabelMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-     
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        if(caller.equalsIgnoreCase("Cicil")){
+            int row = tabel.getSelectedRow();
+            String nocil = tabel.getValueAt(row, 0).toString();
+            String idpel = tabel.getValueAt(row, 1).toString();
+            String napel = tabel.getValueAt(row, 2).toString();
+            int total = Integer.parseInt(tabel.getValueAt(row, 3).toString());
+            int kurang = Integer.parseInt(tabel.getValueAt(row, 4).toString());
+
+            TransaksiCicil.txkode.setText(nocil);
+            TransaksiCicil.txnama.setText(napel);
+            TransaksiCicil.id_pelanggan = idpel;
+            TransaksiCicil.total = total;
+            TransaksiCicil.Kurang = kurang;
+            TransaksiCicil.btnSimpan.setEnabled(true);
+            dispose();
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,20 +154,20 @@ public class frmCariBarang extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCariBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCariCicilan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCariBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCariCicilan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCariBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCariCicilan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCariBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCariCicilan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmCariBarang dialog = new frmCariBarang(new javax.swing.JFrame(), true,"");
+                frmCariCicilan dialog = new frmCariCicilan(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

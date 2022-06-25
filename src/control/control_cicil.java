@@ -19,19 +19,45 @@ public class control_cicil extends koneksi{
         super.setKoneksi();
     }
     public DefaultTableModel model = new DefaultTableModel();
-    public void tampilPengeluaran(String kodebarang,String namaBarang,int harga,int qty,int total){
-        String[] kolom = {"Kode Barang","Nama Barang","Harga","Qty","Total"};
+//    public void tampilPengeluaran(String kodebarang,String namaBarang,int harga,int qty,int total){
+//        String[] kolom = {"Kode Barang","Nama Barang","Harga","Qty","Total"};
+//        model.setColumnIdentifiers(kolom);
+//        if(!(kodebarang.equals(""))){
+//            Object[] data = new Object[5];
+//            data[0]= kodebarang;
+//            data[1]= namaBarang;
+//            data[2]= harga;
+//            data[3]=qty;
+//            data[4]=total;
+//            model.addRow(data);
+//        }
+//    }
+    
+    public void tampilPengeluaran(String no_cicil,String id_pelanggan, String nama_pelanggan, int total, int Kurang){
+        String[] kolom = {"no_cicil","id_pelanggan","nama_pelanggan","Total","Kurang"};
         model.setColumnIdentifiers(kolom);
-        if(!(kodebarang.equals(""))){
+        if(!(no_cicil.equals(""))){
             Object[] data = new Object[5];
-            data[0]= kodebarang;
-            data[1]= namaBarang;
-            data[2]= harga;
-            data[3]=qty;
-            data[4]=total;
+            data[0]= no_cicil;
+            data[1]= id_pelanggan;
+            data[2]= nama_pelanggan;
+            data[3]= total;
+            data[4]=Kurang;
             model.addRow(data);
         }
     }
+    
+    public void transaksiCicilan(String no_cicil, int bayarke, int bayar,String tgl) throws SQLException{
+        String sql = "INSERT INTO transaksicicil (no_cicil, pembayaran, bayar, tanggal) VALUES('"+no_cicil+"','"+bayarke+"','"+bayar+"','"+tgl+"')";
+        st.executeUpdate(sql);
+    }
+    
+    public void updateCicil(String no_cicil, int bayar, int kurang) throws SQLException{
+        String sql = "UPDATE cicil set bayar = '" + bayar + "' , kurang = '" + kurang + "' " +
+                "WHERE no_cicil = '" + no_cicil + "' ";
+        st.executeUpdate(sql);
+    }
+    
     public void simpanCicilan(String no_cicil,String kasir,String id_pelanggan,String namaPelanggan,int diskon,int total,int bayar,int kurang,String tgl) throws SQLException{
         String sql = "INSERT INTO cicil VALUES('"+no_cicil+"','"+kasir+"','"+id_pelanggan+"','"+namaPelanggan+"','"+diskon+"','"+total+"','"+bayar+"','"+kurang+"','"+tgl+"')";
         st.executeUpdate(sql);
