@@ -19,6 +19,7 @@ public class control_cicil extends koneksi{
         super.setKoneksi();
     }
     public DefaultTableModel model = new DefaultTableModel();
+     public DefaultTableModel model2 = new DefaultTableModel();
 //    public void tampilPengeluaran(String kodebarang,String namaBarang,int harga,int qty,int total){
 //        String[] kolom = {"Kode Barang","Nama Barang","Harga","Qty","Total"};
 //        model.setColumnIdentifiers(kolom);
@@ -94,6 +95,28 @@ public class control_cicil extends koneksi{
                 txNofak.setText("F" + nol + AN);
             }else{
                 txNofak.setText("F0001");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void tampilansurancicilan(String no_cicil) {
+        try {
+            String sql = "SELECT * FROM transaksicicil where no_cicil = '" + no_cicil + "' ";
+
+            rs = st.executeQuery(sql);
+            String[] kolom = {"no_cicil","pembayaran","bayar","tanggal"};
+            model2.setColumnIdentifiers(kolom);
+            while(rs.next()){
+                if(!(no_cicil.equals(""))){
+                    Object[] data = new Object[4];
+                    data[0]= no_cicil;
+                    data[1]= rs.getString("Pembayaran");
+                    data[2]= rs.getString("bayar");
+                    data[3]= rs.getString("tanggal");
+                    model2.addRow(data);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);

@@ -24,7 +24,7 @@ public class masterCicil extends koneksi {
         try {
 //            String sql = "SELECT * FROM masterbarang WHERE nama_barang LIKE '%" + nama + "%'";
             String sqli= "SELECT no_cicil, id_pelanggan, nama_pelanggan, total, sum(total-bayar) as Kurang " +
-                    "FROM cicil GROUP By no_cicil";
+                    "FROM cicil WHERE total != bayar GROUP By no_cicil";
             String[] kolom = {"no_cicil","id_pelanggan","nama_pelanggan","Total","Kurang"};
             modelCicil.setColumnIdentifiers(kolom);
             rs = st.executeQuery(sqli);
