@@ -35,7 +35,7 @@ public class masterBarang extends koneksi{
     public void tampil(){
         try {
 //            String sql = "SELECT * FROM masterbarang WHERE nama_barang LIKE '%" + nama + "%'";
-           String sqli= "SELECT * FROM masterBarang" ;
+            String sqli= "SELECT * FROM masterBarang" ;
             String[] kolom = {"Kode Barang","Nama Barang","Stok","Harga"};
             modelBarang.setColumnIdentifiers(kolom);
             rs = st.executeQuery(sqli);

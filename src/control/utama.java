@@ -54,4 +54,5 @@ public class utama extends koneksi{
             Logger.getLogger(utama.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+       
 }

@@ -30,7 +30,7 @@ public class frmCariBarang extends javax.swing.JDialog {
         pl = new pelanggan();
         
         this.caller = caller;
-       tampil();
+        tampil();
   
     }
 
